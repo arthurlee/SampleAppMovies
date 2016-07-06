@@ -1,0 +1,18 @@
+/Users/arthur/github/arthurlee> react-native init SampleAppMovies
+prompt: Directory SampleAppMovies already exists. Continue?:  (no) yes
+This will walk you through creating a new React Native project in /Users/arthur/github/arthurlee/SampleAppMovies
+Installing react-native package from npm...
+Setting up new React Native app in /Users/arthur/github/arthurlee/SampleAppMovies
+SampleAppMovies@0.0.1 /Users/arthur/github/arthurlee/SampleAppMovies
+└── react@15.2.0
+
+To run your app on iOS:
+   cd /Users/arthur/github/arthurlee/SampleAppMovies
+   react-native run-ios
+   - or -
+   Open /Users/arthur/github/arthurlee/SampleAppMovies/ios/SampleAppMovies.xcodeproj in Xcode
+   Hit the Run button
+To run your app on Android:
+   Have an Android emulator running (quickest way to get started), or a device connected
+   cd /Users/arthur/github/arthurlee/SampleAppMovies
+   react-native run-android
