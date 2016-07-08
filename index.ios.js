@@ -29,6 +29,7 @@ import React, { Component } from 'react';
 import {
 	AppRegistry,
 	Image,
+	ListView,
 	StyleSheet,
 	Text,
 	View
@@ -38,7 +39,10 @@ class SampleAppMovies extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			movies: null
+			dataSource: new ListView.DataSource({
+				rowHasChanged: (row1, row2) => row1 != row2
+			}),
+			loaded: false
 		};
 	}
 
@@ -51,20 +55,25 @@ class SampleAppMovies extends Component {
 			.then((response) => response.json())
 			.then((responseData) => {
 				this.setState({
-					movies: responseData.movies
+					dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
+					loaded: true
 				})
 			})
 			.done();
 	}
 
 	render() {
-		if ( ! this.state.movies) {
+		if ( ! this.state.loaded) {
 			return this.renderLoadingView();
 		}
 
-		var movie = this.state.movies[0];
-		console.log(movie.posters.thumbnail);
-		return this.renderMovie(movie);
+		return (
+			<ListView
+				dataSource={this.state.dataSource}
+				renderRow={this.renderMovie}
+				style={styles.listView}
+			/>
+		);
 	}
 
 	renderLoadingView() {
@@ -93,7 +102,7 @@ class SampleAppMovies extends Component {
 		);
 	}
 
-}
+};
 
 const styles = StyleSheet.create({
 	container: {
@@ -105,8 +114,8 @@ const styles = StyleSheet.create({
 	},
 
 	thumbnail: {
-		width: 100,
-		height: 100
+		width: 53,
+		height: 81
 	},
 
 	rightContainer: {
@@ -121,6 +130,11 @@ const styles = StyleSheet.create({
 
 	year: {
 		textAlign: 'center'
+	},
+
+	listView: {
+		paddingTop: 20,
+		backgroundColor: '#F5FCFF'
 	}
 
 
